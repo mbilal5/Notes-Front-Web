@@ -1,94 +1,83 @@
 
 import { PageElement } from './PageElement';
 import { RepositoryNode } from './RepositoryNode';
+import { DataList } from '../lib/DataList';
 
 class Page extends RepositoryNode {
     id: number;
     title: string;
-    elements: Array<PageElement>;
+    elements: DataList<PageElement>;
     indexCounter: number;
     elementIdCounter: number;
-    constructor(id?: number, title?: string, elements?: Array<PageElement>)
+
+    public get Elements(): Array<PageElement>
+    {
+        return this.elements.getElements();
+    }
+    constructor(id?: number, title?: string, elements: Array<PageElement> = null)
     {
         super();
         this.id = id;
         this.title = title != null ? title : 'Untitled Page';
-        this.elements = elements ?? new Array<PageElement>();
-        let maxNumber = 0;
-        this.indexCounter = 0;
-        this.elements.forEach((element: any) =>
+        this.elements = new DataList<PageElement>();
+        if (elements != null)
         {
-            element.index = this.indexCounter++;
-            if (element.id > maxNumber)
-                maxNumber = element.id;
-        });
-        this.elementIdCounter = maxNumber + 1;
+            for (let element of elements)
+            {
+                this.elements.push(element);
+            }
+        }
     }
 
-    appendNewElement()
+    push(type: string = 'p', content: string = '')
     {
-        let id = this.getNextElementId();
-        let element = new PageElement(id);
-        element.index = this.indexCounter++;
+
+        let element = new PageElement(undefined, type, content);
         this.elements.push(element);
     }
 
     addElement(type: string, content: string)
     {
-        const id = this.getNextElementId();
 	    if (type == undefined)
 		    type = 'p';
-        let element = new PageElement(id, type, content);
+        let element = new PageElement(undefined, type, content);
         this.elements.push(element);
-        element.index = this.indexCounter++;
     }
 
     addElementAfterIndex(index: number, type = 'p')
     {
-        const id = this.getNextElementId();
-        let element = new PageElement(id, type);
-        this.elements.push(element);
-        this.moveElementTo(id, index, true);
-        this.elements.sort((a, b) => a.index - b.index);
-        return element.index;
+        let element = new PageElement(undefined, type);
+        this.elements.insert(element, index+1);
+        return index + 1;
     }
 
     getElement(elementId): PageElement
     {
-        return this.elements.find( element => element.id == elementId);
+        return this.elements.getElement(elementId);
     }
 
     getElementByIndex(index) : PageElement
     {
-        return this.elements.find(element => element.index == index);
+        return this.elements.getElementAt(index);
     }
 
     updateElement(elementId: number, content: string)
     {
-        let element = this.elements.find( element => element.id == elementId);
+        let element = this.elements.getElement(elementId);
         element.content = content;
     }
 
     deleteElement(elementId: number)
     {
-        this.elements = this.elements.filter(element => element.id != elementId);
+        this.elements.remove(elementId);
     }
 
     moveElementTo(elementId: number, index: number, beforeIndex = false)
     {
         let element = this.getElement(elementId);
-        let element2 = this.getElementByIndex(index);
-        let factor = beforeIndex ? 1 : -1;
-        element.index = index + (0.01*factor);
-        element2.index = index - (0.01*factor);
-        this.elements.sort((a, b) => a.index - b.index);
+        this.elements.remove(elementId);
+        this.elements.insert(element, index);
     }
-
-    private getNextElementId(): number
-    {
-        return ++this.elementIdCounter;
-    }
-
 
 }
 

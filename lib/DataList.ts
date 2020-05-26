@@ -44,14 +44,35 @@ class DataList<T extends DataElement>
         }
     }
 
-    getElement(index: number) : T
+    getElement(id: number) : T
+    {
+        return this.elements.find(element => element.id == id);
+    }
+
+    getElementIndex(id: number)
+    {
+        return this.elements.findIndex(element => element.id == id);     
+    }
+
+    getElementAt(index: number) : T
     {
         return this.elements[index];
     }
 
-    remove(index: number)
+    getElements(): Array<T>
+    {
+        return this.elements;
+    }
+
+    removeAt(index: number)
     {
         this.elements.splice(index, 1);
+    }
+    
+    remove(id: number)
+    {
+        let index = this.getElementIndex(id);
+        this.removeAt(index);
     }
 }
 

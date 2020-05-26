@@ -12,7 +12,7 @@ describe('adding and remove elements', () => {
     test('remove item', () => {
         let element2 = {content: 'Element 2'};
         list.push(element2);
-        list.remove(0);
-        expect(list.getElement(0)).toBe(element2);
+        list.removeAt(0);
+        expect(list.getElementAt(0)).toBe(element2);
     });
 });

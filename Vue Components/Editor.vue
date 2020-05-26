@@ -10,7 +10,7 @@
                     </header>
 
                     <div class="m-5">
-                        <div v-for="element in page.elements" class="m-0 p-0">
+                        <div v-for="element in page.Elements" class="m-0 p-0">
                             <PageElement v-bind:element="element"
                                          v-on:inputModified="$emit('pageElementModified', $event)"
                                          v-on:elementReordered="onPageElementReordered" 
@@ -36,7 +36,7 @@
         props: ['page', 'section-title', 'onAddNewElementClick', 'show-contents'],
         methods: {
             addNewElementToPage: function(event) {
-                this.page.appendNewElement()
+                this.page.push()
                 this.$emit('newElementToPage', event);
             },
             onPageElementReordered: function (event)

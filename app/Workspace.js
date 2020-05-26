@@ -21,7 +21,7 @@ class Workspace
                 let elements = [];
                 for (let k = 0; k < pageData.elements.length; k++)
                 {
-                    let elementData = pageData.elements[k];
+                    let elementData = pageData.elements.getElementAt(k);
                     let element = new PageElement(elementData.id, elementData.type, elementData.content);
                     element.addOnUpdatePropertyHandler(this.onDataUpdate);
                     elements.push(element);
