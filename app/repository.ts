@@ -11,8 +11,8 @@ for (let i = 0; i < sectionTitles.length; i++)
     for (let j = 0; j < pageTitles.length; j++)
     {
         let page = new Page(j, pageTitles[j]);
-        page.addElement('p', "Hello World!");
-        page.addElement('p', "This is line 2.");
+        page.push('p', "Hello World!");
+        page.push('p', "This is line 2.");
         section.addPage(page);
     }
     sections.push(section);

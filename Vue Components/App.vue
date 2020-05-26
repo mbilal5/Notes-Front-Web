@@ -24,7 +24,7 @@
             workspace.title = "Programming Languages";
             this.sections = workspace.sections;
             this.focusedSection = workspace.sections[0];
-            this.focusedPage = workspace.sections[0].pages[0];
+            this.focusedPage = workspace.sections[0].getPage(1);
         },
         data: function() {
             return {
@@ -44,7 +44,7 @@
             {
                 let focusedSection = this.sections.find(section => section.id == event.sectionId);
                 this.showContents = false;
-                let page = focusedSection.pages.find(page => page.id == event.pageId);
+                let page = focusedSection.getPage(event.pageId);
                 this.focusedSection = focusedSection;
                 this.focusedPage = page;
                 setTimeout(() =>

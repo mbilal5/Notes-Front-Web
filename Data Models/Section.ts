@@ -7,6 +7,11 @@ class Section extends RepositoryNode {
     title: string;
     pages: DataList<Page>;
 
+    get Pages(): Array<Page>
+    {
+        return this.pages.getElements();
+    }
+
     constructor(id?: number, title?: string, pages?: Array<Page>)
     {
         super();
@@ -14,9 +19,12 @@ class Section extends RepositoryNode {
         this.title = title ?? 'Untitled Page';
         this.pages = new DataList<Page>();
 
-        for (let page of pages)
+        if (pages != undefined)
         {
-            pages.push(page);
+            for (let page of pages)
+            {
+                pages.push(page);
+            }
         }
     }
   
@@ -30,6 +38,12 @@ class Section extends RepositoryNode {
     {
         this.pages.push(page);
     }
+
+    getPage(pageId: number): Page
+    {
+        return this.pages.getElement(pageId);
+    }
+    
     removePage(pageId: number)
     {
         this.pages.remove(pageId);

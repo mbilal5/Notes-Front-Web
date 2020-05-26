@@ -36,15 +36,7 @@ class Page extends RepositoryNode {
         this.elements.push(element);
     }
 
-    addElement(type: string, content: string)
-    {
-	    if (type == undefined)
-		    type = 'p';
-        let element = new PageElement(undefined, type, content);
-        this.elements.push(element);
-    }
-
-    addElementAfterIndex(index: number, type = 'p')
+    insert(index: number, type = 'p')
     {
         let element = new PageElement(undefined, type);
         this.elements.insert(element, index+1);
@@ -56,7 +48,7 @@ class Page extends RepositoryNode {
         return this.elements.getElement(elementId);
     }
 
-    getElementByIndex(index) : PageElement
+    getElementAt(index) : PageElement
     {
         return this.elements.getElementAt(index);
     }
@@ -70,13 +62,6 @@ class Page extends RepositoryNode {
     deleteElement(elementId: number)
     {
         this.elements.remove(elementId);
-    }
-
-    moveElementTo(elementId: number, index: number, beforeIndex = false)
-    {
-        let element = this.getElement(elementId);
-        this.elements.remove(elementId);
-        this.elements.insert(element, index);
     }
 
 }

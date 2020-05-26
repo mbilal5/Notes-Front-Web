@@ -4,36 +4,13 @@ import { PageElement } from '../Data Models/PageElement';
 
 class Workspace
 {
-    constructor(workspaceJSON)
+    constructor(workspace)
     {
-        this.id = workspaceJSON.id;
-        this.title = workspaceJSON.title;
+        this.id = workspace.id;
+        this.title = workspace.title;
+        this.sections = workspace.sections;
         this.onDataUpdate = this.onDataUpdate.bind(this);
-        this.sections = [];
-        for (let i = 0; i < workspaceJSON.sections.length; i++)
-        {
-            let sectionData = workspaceJSON.sections[i];
-            let pagesData = sectionData.pages;
-            let pages = [];
-            for (let j = 0; j < pagesData.length; j++)
-            {
-                let pageData = pagesData[j];
-                let elements = [];
-                for (let k = 0; k < pageData.elements.length; k++)
-                {
-                    let elementData = pageData.elements.getElementAt(k);
-                    let element = new PageElement(elementData.id, elementData.type, elementData.content);
-                    element.addOnUpdatePropertyHandler(this.onDataUpdate);
-                    elements.push(element);
-                }
-                let page = new Page(pageData.id, pageData.title, elements);
-                page.addOnUpdatePropertyHandler(this.onDataUpdate);
-                pages.push(page);
-            }
-            let section = new Section(sectionData.id, sectionData.title, pages);
-            section.addOnUpdatePropertyHandler(this.onDataUpdate);
-            this.sections.push(section);
-        }
+        
     }
 
     getSection(sectionId)

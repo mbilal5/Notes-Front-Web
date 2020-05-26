@@ -1,7 +1,7 @@
 <template>
     <div>
         <p> {{ section.title }}</p>
-        <div v-for="page in section.pages">
+        <div v-for="page in section.Pages">
             <PageLink v-bind:page="page" v-on:navpageclick="onNavPageClicked" v-bind:is-active="isActiveSection && activePage.id == page.id" />
         </div>
 

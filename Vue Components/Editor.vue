@@ -41,12 +41,9 @@
             },
             onPageElementReordered: function (event)
             {
-                this.page.moveElementTo(event.elementId, event.index, event.isPlaceBefore);
             },
             onPageElementKeyEnter: function (event)
             {
-                let index = this.page.addElementAfterIndex(event.index);
-
             },
             DeletePageElement: function (event)
             {
