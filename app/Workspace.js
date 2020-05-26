@@ -1,6 +1,6 @@
-﻿import { Section } from '../Data Models/Section.js';
-import { Page } from '../Data Models/Page.js';
-import { PageElement } from '../Data Models/PageElement.js';
+﻿import { Section } from '../Data Models/Section';
+import { Page } from '../Data Models/Page';
+import { PageElement } from '../Data Models/PageElement';
 
 class Workspace
 {

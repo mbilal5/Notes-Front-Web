@@ -2,15 +2,19 @@ import { Page } from './Page';
 import { RepositoryNode } from './RepositoryNode';
 
 class Section extends RepositoryNode {
+    id: any;
+    title: any;
+    pages: any;
+    pageIdCounter: any;
 
-    constructor(id, title, pages)
+    constructor(id?: any, title?: any, pages?: any)
     {
         super();
         this.id = id != undefined ? id : 0;
         this.title = title != undefined ? title : 'Untitled Page';
         this.pages = pages != undefined ? pages : [];
         let maxNumber = 0;
-        this.pages.forEach(page =>
+        this.pages.forEach( (page: any) =>
         {
             if (page.id > maxNumber)
                 maxNumber = page.id;

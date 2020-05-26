@@ -3,8 +3,12 @@ import { PageElement } from './PageElement';
 import { RepositoryNode } from './RepositoryNode';
 
 class Page extends RepositoryNode {
-
-    constructor(id, title, elements)
+    id: any;
+    title: any;
+    elements: any;
+    indexCounter: any;
+    elementIdCounter: any;
+    constructor(id?: any, title?: any, elements?: any)
     {
         super();
         this.id = id;
@@ -12,7 +16,7 @@ class Page extends RepositoryNode {
         this.elements = elements != null ? elements : [];
         let maxNumber = 0;
         this.indexCounter = 0;
-        this.elements.forEach(element =>
+        this.elements.forEach((element: any) =>
         {
             element.index = this.indexCounter++;
             if (element.id > maxNumber)
@@ -25,7 +29,7 @@ class Page extends RepositoryNode {
     {
         let id = this.getNextElementId();
         let element = new PageElement(id);
-        element.indexCounter = this.indexCounter++;
+        element.index = this.indexCounter++;
         this.elements.push(element);
     }
 
@@ -36,7 +40,7 @@ class Page extends RepositoryNode {
 		    type = 'p';
         let element = new PageElement(id, type, content);
         this.elements.push(element);
-        element.indexCounter = this.indexCounter++;
+        element.index = this.indexCounter++;
     }
 
     addElementAfterIndex(index, type = 'p')
