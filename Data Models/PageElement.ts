@@ -1,15 +1,15 @@
 import { RepositoryNode } from './RepositoryNode';
 class PageElement extends RepositoryNode
 {
-    id: any;
-    type: any;
-    content: any;
-    index: any;
-    constructor(elementId?: any, type?: any, content?: any)
+    id: number;
+    type: string;
+    content: string;
+    index: number;
+    constructor(elementId?: number, type?: string, content?: string)
     {
         super();
-        this.id = elementId != undefined ? elementId : 0;
-        this.type = type != undefined ? type : 'p';
+        this.id = elementId ?? 0;
+        this.type = type ?? 'p';
         this.content = content;
         this.index = null;
     }

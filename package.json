@@ -2,23 +2,29 @@
   "name": "notes-front-end",
   "main": "index.js",
   "scripts": {
+    "test": "jest",
     "watch": "webpack --watch",
     "start": "node index.js"
   },
   "babel": {
     "presets": [
-      "@babel/preset-react"
+      "@babel/preset-env",
+      "@babel/preset-typescript"
     ]
   },
   "dependencies": {
     "@babel/core": "^7.9.0",
     "@babel/plugin-transform-typescript": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
+    "@babel/preset-typescript": "^7.9.0",
     "@types/node": "^13.13.4",
     "babel-core": "^6.26.3",
+    "babel-jest": "^26.0.1",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
     "express": "^4.17.1",
+    "jest": "^26.0.1",
     "ts-loader": "^7.0.3",
     "typescript": "^3.8.3",
     "vue": "^2.6.11",

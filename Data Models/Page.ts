@@ -3,17 +3,17 @@ import { PageElement } from './PageElement';
 import { RepositoryNode } from './RepositoryNode';
 
 class Page extends RepositoryNode {
-    id: any;
-    title: any;
-    elements: any;
-    indexCounter: any;
-    elementIdCounter: any;
-    constructor(id?: any, title?: any, elements?: any)
+    id: number;
+    title: string;
+    elements: Array<PageElement>;
+    indexCounter: number;
+    elementIdCounter: number;
+    constructor(id?: number, title?: string, elements?: Array<PageElement>)
     {
         super();
         this.id = id;
         this.title = title != null ? title : 'Untitled Page';
-        this.elements = elements != null ? elements : [];
+        this.elements = elements ?? new Array<PageElement>();
         let maxNumber = 0;
         this.indexCounter = 0;
         this.elements.forEach((element: any) =>
@@ -33,7 +33,7 @@ class Page extends RepositoryNode {
         this.elements.push(element);
     }
 
-    addElement(type, content)
+    addElement(type: string, content: string)
     {
         const id = this.getNextElementId();
 	    if (type == undefined)
@@ -43,7 +43,7 @@ class Page extends RepositoryNode {
         element.index = this.indexCounter++;
     }
 
-    addElementAfterIndex(index, type = 'p')
+    addElementAfterIndex(index: number, type = 'p')
     {
         const id = this.getNextElementId();
         let element = new PageElement(id, type);
@@ -53,28 +53,28 @@ class Page extends RepositoryNode {
         return element.index;
     }
 
-    getElement(elementId)
+    getElement(elementId): PageElement
     {
         return this.elements.find( element => element.id == elementId);
     }
 
-    getElementByIndex(index)
+    getElementByIndex(index) : PageElement
     {
         return this.elements.find(element => element.index == index);
     }
 
-    updateElement(elementId, content)
+    updateElement(elementId: number, content: string)
     {
         let element = this.elements.find( element => element.id == elementId);
         element.content = content;
     }
 
-    deleteElement(elementId)
+    deleteElement(elementId: number)
     {
         this.elements = this.elements.filter(element => element.id != elementId);
     }
 
-    moveElementTo(elementId, index, beforeIndex = false)
+    moveElementTo(elementId: number, index: number, beforeIndex = false)
     {
         let element = this.getElement(elementId);
         let element2 = this.getElementByIndex(index);
@@ -84,7 +84,7 @@ class Page extends RepositoryNode {
         this.elements.sort((a, b) => a.index - b.index);
     }
 
-    getNextElementId()
+    private getNextElementId(): number
     {
         return ++this.elementIdCounter;
     }

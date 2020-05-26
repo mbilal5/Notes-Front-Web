@@ -2,17 +2,17 @@ import { Page } from './Page';
 import { RepositoryNode } from './RepositoryNode';
 
 class Section extends RepositoryNode {
-    id: any;
-    title: any;
-    pages: any;
-    pageIdCounter: any;
+    id: number;
+    title: string;
+    pages: Array<Page>;
+    pageIdCounter: number;
 
-    constructor(id?: any, title?: any, pages?: any)
+    constructor(id?: number, title?: string, pages?: Array<Page>)
     {
         super();
-        this.id = id != undefined ? id : 0;
-        this.title = title != undefined ? title : 'Untitled Page';
-        this.pages = pages != undefined ? pages : [];
+        this.id = id ?? 0;
+        this.title = title ?? 'Untitled Page';
+        this.pages = pages ?? new Array<Page>();
         let maxNumber = 0;
         this.pages.forEach( (page: any) =>
         {
@@ -20,25 +20,6 @@ class Section extends RepositoryNode {
                 maxNumber = page.id;
         });
         this.pageIdCounter = maxNumber + 1;
-    }
-
-    get Id()
-    {
-        return this.id;
-    }
-
-    set Id(value)
-    {
-        this.id = value;
-    }
-
-    get Title() {
-        return this.title;
-    }
-
-    set Title(value)
-    {
-        this.title = value;
     }
   
     appendNewPage()
@@ -49,17 +30,17 @@ class Section extends RepositoryNode {
         this.pages.push(page);
     }
 
-    addPage(page)
+    addPage(page: Page)
     {
         page.id = this.getNextPageId();
         this.pages.push(page);
     }
-    removePage(pageId)
+    removePage(pageId: number)
     {
         throw new Error('removePage not implemented yet');
     }
 
-    getNextPageId()
+    private getNextPageId(): number
     {
         return ++this.pageIdCounter;
     }
